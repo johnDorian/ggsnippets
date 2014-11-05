@@ -1,5 +1,5 @@
 Package: everything
-Depends:
+Depends: 
     lubridate,
     dplyr,
     stringr,
@@ -16,3 +16,6 @@ Maintainer: Jason Lessels <jlessels@gmail.com>
 Description: A small package to load day to day packages and a couple of useful
     functions
 License: GPL
+Suggests:
+    testthat,
+    knitr

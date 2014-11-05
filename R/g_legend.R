@@ -19,8 +19,14 @@
 #' grid.arrange(arrangeGrob(plt1, plt2, ncol=1), plt_legend, ncol=2, widths=c(0.8,0.2))
 
 g_legend<-function(a.gplot){
+  if(!("gg" %in% class(plt2)||"ggplot" %in% class(plt2))){
+    stop( "a.gplot must be a ggplot object (see ?ggplot)")
+  }
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  if(length(leg)<1){
+    stop("Does your plot have a legend in it?")
+  }
   legend <- tmp$grobs[[leg]]
   return(legend)
 }
