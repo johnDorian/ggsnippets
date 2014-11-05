@@ -15,11 +15,15 @@ a ggplot object with new facet titles.
 
 }
 \examples{
+## Add a factor to the cars example data to facet the plots
 x_cars <- data.frame(cars, variable = sample(letters[1:5], 50, replace = TRUE))
-plt1 <- ggplot() + geom_point(aes(speed, dist), x_cars) + facet_wrap(~variable, ncol=1)
+## Create the plot with facets
+plt <- ggplot() + geom_point(aes(speed, dist), x_cars) + facet_wrap(~variable, ncol=1)
 plt
-facet_wrap_labeller(plt1)
-facet_wrap_labeller(plt1, labels = c(expression(a^2), expression(b[1]), expression(frac(c,2)), "d", expression(infinity)))
+## An example without labels - no real point in this.
+facet_wrap_labeller(plt)
+## Adding expressions within the facet labels.
+facet_wrap_labeller(plt, labels = c(expression(a^2), expression(b[1]), expression(frac(c,2)), "d", expression(infinity)))
 }
 \references{
 \url{http://stackoverflow.com/questions/11979017}
