@@ -3,10 +3,10 @@
 \alias{g_legend}
 \title{Extract legend from ggplot geom object}
 \usage{
-g_legend(a.gplot)
+g_legend(gg.plot)
 }
 \arguments{
-\item{a.gplot}{A ggplot object}
+\item{gg.plot}{A ggplot object}
 }
 \value{
 The legend as a grob object from the plot

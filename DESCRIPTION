@@ -1,5 +1,5 @@
 Package: everything
-Depends: 
+Depends:
     lubridate,
     dplyr,
     stringr,
