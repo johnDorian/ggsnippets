@@ -2,7 +2,7 @@ context("Testing the g_legend function")
 
 test_that("A simple working example", {
   plt <- ggplot() + geom_boxplot(aes(factor(gear), mpg, fill=factor(gear)), mtcars)
-  expect_that(class(g_legend(plt))[1]=="gtable", equals(TRUE))
+  expect_that(inherits(g_legend(plt), "gtable"), equals(TRUE))
 }
 )
 test_that("A non ggplot object should throw an error", {

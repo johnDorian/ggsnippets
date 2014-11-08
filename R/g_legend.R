@@ -19,7 +19,7 @@
 #' grid.arrange(arrangeGrob(plt1, plt2, ncol=1), plt_legend, ncol=2, widths=c(0.8,0.2))
 
 g_legend<-function(gg.plot){
-  if(!("gg" %in% class(gg.plot)||"ggplot" %in% class(gg.plot))){
+  if(!inherits(gg.plot, "ggplot")){
     stop( "gg.plot must be a ggplot object (see ?ggplot)")
   }
   tmp <- ggplot_gtable(ggplot_build(gg.plot))
