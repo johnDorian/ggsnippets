@@ -9,7 +9,6 @@
   # Build the plot
   build <- ggplot_build(x)
   # Check to see if the y axis is a datetime or date scale on the x axis  
-  res <- 0
   if(inherits(build$panel$x_scales[[1]], "datetime")){
     return("datetime")
   }
@@ -87,19 +86,21 @@
 #'  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_few(20)
 #'  
 #'  # Plot all three together
-#'  rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+#'  combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
 #'                                             min_temp_plot,
 #'                                             max_temp_plot
 #'                                        ),
 #'                          limits = c(dmy("01011960", "31122014"))
 #'  )
-#' # Plot all together with zooming in on 1990 - 2000
-#'  rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+#' combined_plot
+#'  # Plot all together with zooming in on 1990 - 2000
+#'  combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
 #'                                             min_temp_plot,
 #'                                             max_temp_plot
 #'                                        ),
 #'                          limits = c(dmy("01011990", "31122000"))
 #'  )
+#'  combined_plot
 #'  # An example with data from different time frames
 #'  # Plot monthly rain from 1960 - 1980
 #'  rain_plot <- breamardata %>%
@@ -118,15 +119,28 @@
 #'  max_temp_plot
 #'  
 #'  # Plot all three timeseries together. 
-#'  rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+#'  combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
 #'                                             min_temp_plot,
 #'                                             max_temp_plot
 #'                                            ),
 #'                          limits = c(dmy("01011960", "31122014"))
 #'  )
 #'    
-#'  
-
+#' # An example with a legend
+#' # Create three plots without subsetting the data.
+#' rain_plot <- ggplot() + geom_line(aes(date, rain_mm), breamardata) + theme_few(20)
+#' # Create a plot with groups and a legend. 
+#' temp_data <- melt(breamardata[, c("date", "min_temp", "max_temp")],
+#'                   id.var = "date"
+#'                   )
+#' temp_plot <- ggplot() + geom_line(aes(date, value, colour=variable), temp_data) + 
+#'                         theme_few(20)
+#' 
+#' combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot, 
+#'                                                             temp_plot
+#'                                                             ),
+#'                                          limits = c(dmy("01011990", "31122000"))
+#' )
 rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = TRUE, 
                                     shrink_space = TRUE, shrink_factor = 0.2){
   ## Taken and modified from http://stackoverflow.com/questions/13294952/
@@ -157,12 +171,14 @@ rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = 
     stop("All objects must be of class ggplot (see ?is.ggplot)")
   }
   gtl <- lapply(ggplots, ggplotGrob)
-  
+  #return(gtl)
   bind2 <- function (x, y) 
   {
-    if(ncol(x) != ncol(y)){
-      stop("plots have incorrect dimensions")
-    }
+    
+    ## Temp fix to remove this and allow for legends.
+    #if(ncol(x) != ncol(y)){
+    #  stop("plots have incorrect dimensions")
+    #}
     if (nrow(x) == 0) 
       return(y)
     if (nrow(y) == 0) 
@@ -177,5 +193,5 @@ rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = 
     x
   }
   
-  grid.arrange(Reduce(bind2, gtl), ncol=1)
+  arrangeGrob(Reduce(bind2, gtl), ncol=1)
 }

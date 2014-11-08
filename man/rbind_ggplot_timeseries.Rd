@@ -38,19 +38,21 @@ This function sets the range of timeseries ggplots
  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_few(20)
 
  # Plot all three together
- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+ combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
                                             min_temp_plot,
                                             max_temp_plot
                                        ),
                          limits = c(dmy("01011960", "31122014"))
  )
-# Plot all together with zooming in on 1990 - 2000
- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+combined_plot
+ # Plot all together with zooming in on 1990 - 2000
+ combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
                                             min_temp_plot,
                                             max_temp_plot
                                        ),
                          limits = c(dmy("01011990", "31122000"))
  )
+ combined_plot
  # An example with data from different time frames
  # Plot monthly rain from 1960 - 1980
  rain_plot <- breamardata \%>\%
@@ -69,7 +71,7 @@ This function sets the range of timeseries ggplots
  max_temp_plot
 
  # Plot all three timeseries together.
- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+ combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
                                             min_temp_plot,
                                             max_temp_plot
                                            ),
