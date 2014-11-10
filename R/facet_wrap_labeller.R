@@ -1,25 +1,34 @@
 #'
 #'
 #' @title A function to allow for expressions in ggplot facet titles. 
+#' @description Allows for the use of expressions with facet titles.
 #' @param gg.plot a ggplot object
+#' @param labels labels for each facet.
 #' @return a ggplot object with new facet titles. 
 #' @references \url{http://stackoverflow.com/questions/11979017}
 #' @seealso plotmath
+#' @export
 #' @examples 
 #' ## Add a factor to the cars example data to facet the plots
-#' x_cars <- data.frame(cars, variable = sample(letters[1:5], 50, replace = TRUE))
+#' x_cars <- data.frame(cars, variable = sample(letters[1:5],
+#'                                              50,
+#'                                              replace = TRUE))
 #' ## Create the plot with facets
-#' plt <- ggplot() + geom_point(aes(speed, dist), x_cars) + facet_wrap(~variable, ncol=1)
+#' plt <- ggplot() + geom_point(aes(speed, dist), x_cars) + 
+#'        facet_wrap(~variable, ncol=1)
 #' plt
 #' ## An example without labels - no real point in this. 
 #' facet_wrap_labeller(plt)
 #' ## Adding expressions within the facet labels. 
-#' facet_wrap_labeller(plt, labels = c(expression(a^2), expression(b[1]), expression(frac(c,2)), "d", expression(infinity)))
-
+#' facet_wrap_labeller(plt, labels = c(expression(a^2), 
+#'                                    expression(b[1]), 
+#'                                    expression(frac(c,2)),
+#'                                     "d",
+#'                                      expression(infinity)))
 
  
 facet_wrap_labeller <- function(gg.plot,labels=NULL) {
-  if(!("gg" %in% class(gg.plot)||"ggplot" %in% class(gg.plot))){
+  if(!inherits(gg.plot, "ggplot")){
     stop( "gg.plot must be a ggplot object (see ?ggplot)")
   }
   g <- ggplotGrob(gg.plot)
@@ -38,3 +47,4 @@ facet_wrap_labeller <- function(gg.plot,labels=NULL) {
   class(g) = c("arrange", "ggplot",class(g)) 
   g
 }
+

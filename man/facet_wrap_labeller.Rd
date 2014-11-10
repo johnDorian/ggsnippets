@@ -7,23 +7,35 @@ facet_wrap_labeller(gg.plot, labels = NULL)
 }
 \arguments{
 \item{gg.plot}{a ggplot object}
+
+\item{labels}{labels for each facet.}
 }
 \value{
 a ggplot object with new facet titles.
 }
 \description{
+Allows for the use of expressions with facet titles.
+}
+\details{
 
 }
 \examples{
 ## Add a factor to the cars example data to facet the plots
-x_cars <- data.frame(cars, variable = sample(letters[1:5], 50, replace = TRUE))
+x_cars <- data.frame(cars, variable = sample(letters[1:5],
+                                             50,
+                                             replace = TRUE))
 ## Create the plot with facets
-plt <- ggplot() + geom_point(aes(speed, dist), x_cars) + facet_wrap(~variable, ncol=1)
+plt <- ggplot() + geom_point(aes(speed, dist), x_cars) +
+       facet_wrap(~variable, ncol=1)
 plt
 ## An example without labels - no real point in this.
 facet_wrap_labeller(plt)
 ## Adding expressions within the facet labels.
-facet_wrap_labeller(plt, labels = c(expression(a^2), expression(b[1]), expression(frac(c,2)), "d", expression(infinity)))
+facet_wrap_labeller(plt, labels = c(expression(a^2),
+                                   expression(b[1]),
+                                   expression(frac(c,2)),
+                                    "d",
+                                     expression(infinity)))
 }
 \references{
 \url{http://stackoverflow.com/questions/11979017}

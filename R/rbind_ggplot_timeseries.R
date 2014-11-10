@@ -1,80 +1,16 @@
-#' A function to determine if the x axis scale is datetime or date formatted
-#'  @export rbind_ggplot_timeseries
-#'  
-.ggplot_x_date_scale <- function(x){
-  # make sure the imput is a ggplot object
-  if(!is.ggplot(x)){
-    stop("Not a ggplot object")
-  }
-  # Build the plot
-  build <- ggplot_build(x)
-  # Check to see if the y axis is a datetime or date scale on the x axis  
-  if(inherits(build$panel$x_scales[[1]], "datetime")){
-    return("datetime")
-  }
-  if(inherits(build$panel$x_scales[[1]], "date")){
-    return("date")
-  }
-  stop("X axis scale must be either date or datetime")
-}
-
-#' A function to set the date range limit of the x axis of a list of ggplots
-.set_x_scales <- function(limits, ggplot_list){
-  # Check the limtits 
-  if(!inherits(limits, "POSIXt")){
-    stop("limits must be of class POSIXt")
-  }
-  date_format <- lapply(ggplot_list, .ggplot_x_date_scale)
-  scale_list<- list()
-  for(i in 1:length(ggplot_list)){
-    if(date_format[[i]]=="datetime"){
-      scale_list[[i]] <- ggplot_list[[i]] + scale_x_datetime(limits=limits)
-    } else {
-      scale_list[[i]] <- ggplot_list[[i]] + scale_x_date(limits=as.Date(limits))
-    }
-  }
-  scale_list
-}
-
-#' A fucntion to suppress the x axis labels, tick marks and title of all plots excluding the 
-#' last plot in the list.
-.hide_x_labels <- function(ggplot_list){
-  for(i in 1:(length(ggplot_list)-1)){
-    ggplot_list[[i]] <- ggplot_list[[i]] + 
-      theme(axis.ticks.x = element_blank(), 
-            axis.text.x = element_blank(), 
-            axis.title.x = element_blank())
-  }
-  ggplot_list
-  
-}
-
-#' A function to change the plot margins and therefore shrinking the gap between the plots
-.shrink_space <- function(ggplot_list, shrink_factor){
-  for(i in 1:length(ggplot_list)){
-    if(i==1){
-      ggplot_list[[i]]<- ggplot_list[[i]] + theme(plot.margin = unit(c(1,1,-1*shrink_factor,1), "line"))
-    } else {
-      ggplot_list[[i]]<- ggplot_list[[i]] + theme(plot.margin = unit(c(-1*shrink_factor,1,-1*shrink_factor,1), "line"))
-    }
-    if(i==length(ggplot_list)){
-      ggplot_list[[i]]<- ggplot_list[[i]] + theme(plot.margin = unit(c(-1*shrink_factor,1,1,1), "line"))
-    }
-  }
-  ggplot_list
-}
-
-
 #' 
 #' @title combine multiple time series ggplots
+#' @description This function combines multiple time series gplots. It allows for setting the x limits
+#' of all plots and removes x axis labels. 
 #' @param ggplot_list A \code{list} of ggplot objects in order to be plotted. Ordered from top to bottom
 #' @param limits a \code{vector} (n = 2) of \code{as.POSIXct} objects representing the minimum and maximum dates of the timeseries
 #' @param hide_x_labels a logical value indicating if the x axis labels, ticks and title should be suppressed from all but the last plot. Default is \code{TRUE}
 #' @param shrink_space a logical value indicating if the space between the plots should be reduced. Ignored if \code{hide_x_labels = FALSE}. Default is \code{TRUE}
 #' @param shrink_factor a numerical value indicating the distance between each of the plots.
-#' @return returns a \code{grob} object using the \code{grid.arrange} function.
+#' @return returns a \code{grob} object using the \code{arrangeGrob} function.
 #' @description This function sets the range of timeseries ggplots
 #'  and combines them in one column and returns a \code{grob} object. 
+#' @export
 #'  @examples
 #'  # Load some example time series data
 #'  data(breamardata)
@@ -156,13 +92,13 @@ rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = 
   if(!is.numeric(shrink_factor)&length(shrink_factor)>1){
     stop("shrink_factor must be numeric and of length 1.")
   }
-  ggplots <- .set_x_scales(limits=limits, ggplot_list)
+  ggplots <- set_x_scales(limits=limits, ggplot_list)
   
   
   if(hide_x_labels){
-    ggplots <- .hide_x_labels(ggplots)
+    ggplots <- hide_x_labels(ggplots)
     if(shrink_space){
-      ggplots <- .shrink_space(ggplots, shrink_factor)
+      ggplots <- shrink_space(ggplots, shrink_factor)
     }
   }
   
@@ -186,9 +122,9 @@ rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = 
     y$layout$t <- y$layout$t + nrow(x)
     y$layout$b <- y$layout$b + nrow(x)
     x$layout <- rbind(x$layout, y$layout)
-    x$heights <- gtable:::insert.unit(x$heights, y$heights)
+    x$heights <- insert.unit(x$heights, y$heights)
     x$rownames <- c(x$rownames, y$rownames)
-    x$widths <- grid::unit.pmax(x$widths, y$widths)
+    x$widths <- unit.pmax(x$widths, y$widths)
     x$grobs <- append(x$grobs, y$grobs)
     x
   }

@@ -18,11 +18,11 @@ rbind_ggplot_timeseries(ggplot_list = list(), limits, hide_x_labels = TRUE,
 \item{shrink_factor}{a numerical value indicating the distance between each of the plots.}
 }
 \value{
-returns a \code{grob} object using the \code{grid.arrange} function.
+returns a \code{grob} object using the \code{arrangeGrob} function.
 }
 \description{
-This function sets the range of timeseries ggplots
- and combines them in one column and returns a \code{grob} object.
+This function combines multiple time series gplots. It allows for setting the x limits
+of all plots and removes x axis labels.
 }
 \details{
 
@@ -77,5 +77,21 @@ combined_plot
                                            ),
                          limits = c(dmy("01011960", "31122014"))
  )
+
+# An example with a legend
+# Create three plots without subsetting the data.
+rain_plot <- ggplot() + geom_line(aes(date, rain_mm), breamardata) + theme_few(20)
+# Create a plot with groups and a legend.
+temp_data <- melt(breamardata[, c("date", "min_temp", "max_temp")],
+                  id.var = "date"
+                  )
+temp_plot <- ggplot() + geom_line(aes(date, value, colour=variable), temp_data) +
+                        theme_few(20)
+
+combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
+                                                            temp_plot
+                                                            ),
+                                         limits = c(dmy("01011990", "31122000"))
+)
 }
 
