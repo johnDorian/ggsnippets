@@ -9,6 +9,9 @@ before_install:
 
 install:
   - ./travis-tool.sh install_deps
+  - ./travis-tool.sh install_r rmarkdown
+  - ./travis-tool.sh install_r test_that
+  - ./travis-tool.sh install_r lubridate
 
 script: ./travis-tool.sh run_tests
 
