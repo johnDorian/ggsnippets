@@ -30,6 +30,7 @@ of all plots and removes x axis labels.
 \examples{
 # Load some example time series data
  library(lubridate)
+ library(dplyr)
  data(breamardata)
  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
 
