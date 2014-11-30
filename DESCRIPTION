@@ -1,24 +1,23 @@
-Package: everything
+Package: ggsnippets
 Depends:
-    lubridate,
-    dplyr,
-    stringr,
     ggplot2,
     gridExtra,
     gtable,
-    ggthemes,
-    scales,
-    reshape2
-Title: What the package does (short line)
+    ggthemes
+Title: A few addons for the ggplot2 package
 Version: 1.0
 Date: 2014-11-05
 Type: Package
 Author: Jason Lessels
 Maintainer: Jason Lessels <jlessels@gmail.com>
 LazyLoad: true
-Description: A small package to load day to day packages and a couple of useful
-    functions
+Description: A package to store some useful ggplot functions.
 License: GPL
 Suggests:
     testthat,
-    knitr
+    knitr,
+    scales,
+    lubridate,
+    dplyr,
+    stringr,
+    reshape2

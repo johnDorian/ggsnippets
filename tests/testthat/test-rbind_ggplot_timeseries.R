@@ -1,4 +1,5 @@
 context("Testing the rbind_ggplot_timeseries function")
+library(lubridate)
 
 test_that("A simple working example", {
   data(breamardata)

@@ -1,6 +1,6 @@
 #' everything.
 #'
-#' @name everything
+#' @name ggsnippets
 #' @docType package
 #' @import ggplot2 gridExtra grid gtable
 NULL

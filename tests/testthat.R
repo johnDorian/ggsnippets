@@ -1,4 +1,5 @@
 library(testthat)
-library(everything)
+library(ggsnippets)
 
-test_check("everything")
+
+test_check("ggsnippets")

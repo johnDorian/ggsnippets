@@ -13,6 +13,7 @@
 #' @export
 #'  @examples
 #'  # Load some example time series data
+#'  library(lubridate)
 #'  data(breamardata)
 #'  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
 #'  

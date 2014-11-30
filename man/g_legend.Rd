@@ -24,12 +24,14 @@ plt1 <- ggplot() + geom_boxplot(aes(factor(gear), mpg, fill=factor(gear)), mtcar
 plt_legend <- g_legend(plt1)
 ## Create a second boxplot with the same fill
 plt2 <- ggplot() + geom_boxplot(aes(factor(gear), disp, fill=factor(gear)), mtcars)
-## Supress the legends from both plots
+## Suppress the legends from both plots
 plt1 <- plt1 +  theme(legend.position="none")
 plt2 <- plt2 +  theme(legend.position="none")
-arrangeGrob(plt1, plt2, plt_legend, ncol=3)
+combined_plot <- arrangeGrob(plt1, plt2, plt_legend, ncol=3)
+combined_plot
 ## Or a slightly nicer example
-arrangeGrob(arrangeGrob(plt1, plt2, ncol=1), plt_legend, ncol=2, widths=c(0.8,0.2))
+combined_plot <- arrangeGrob(arrangeGrob(plt1, plt2, ncol=1), plt_legend, ncol=2, widths=c(0.8,0.2))
+combined_plot
 }
 \references{
 Obtained from \url{http://stackoverflow.com/questions/11883844}
