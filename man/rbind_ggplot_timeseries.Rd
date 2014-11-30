@@ -31,6 +31,7 @@ of all plots and removes x axis labels.
 # Load some example time series data
  library(lubridate)
  library(dplyr)
+ library(reshape2)
  data(breamardata)
  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
 
