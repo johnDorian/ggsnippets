@@ -2,8 +2,7 @@ Package: ggsnippets
 Depends:
     ggplot2,
     gridExtra,
-    gtable,
-    ggthemes
+    gtable
 Title: A few addons for the ggplot2 package
 Version: 1.0
 Date: 2014-11-05
@@ -20,4 +19,5 @@ Suggests:
     lubridate,
     dplyr,
     stringr,
-    reshape2
+    reshape2,
+    ggthemes

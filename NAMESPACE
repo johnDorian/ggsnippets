@@ -2,6 +2,7 @@
 
 export(facet_wrap_labeller)
 export(g_legend)
+export(grobsave)
 export(rbind_ggplot_timeseries)
 import(ggplot2)
 import(grid)

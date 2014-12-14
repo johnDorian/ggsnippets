@@ -16,6 +16,7 @@
 #'  library(lubridate)
 #'  library(dplyr)
 #'  library(reshape2)
+#'  library(ggthemes)
 #'  data(breamardata)
 #'  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
 #'  
