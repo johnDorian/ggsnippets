@@ -1,3 +1,7 @@
+#' A function similar to combine multiple timeseries plots in a column
+#' 
+#' This function is based on the rbind function in the gtable package. The function is designed 
+#' to work with time series plots and allow for the combination of multiple plots. 
 #' 
 #' @title combine multiple time series ggplots
 #' @description This function combines multiple time series gplots. It allows for setting the x limits
@@ -84,7 +88,7 @@
 rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = TRUE, 
                                     shrink_space = TRUE, shrink_factor = 0.2){
   ## Taken and modified from http://stackoverflow.com/questions/13294952/
-  if(!all(sapply(ggplot_list, is.ggplot))){
+  if(!all(sapply(ggplot_list, ggplot2::is.ggplot))){
     stop("all plots must be of class ggplot")
   }
   if(!is.logical(hide_x_labels)){
@@ -107,10 +111,10 @@ rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = 
   }
   
 
-  if(!all(sapply(ggplots, is.ggplot))){
+  if(!all(sapply(ggplots, ggplot2::is.ggplot))){
     stop("All objects must be of class ggplot (see ?is.ggplot)")
   }
-  gtl <- lapply(ggplots, ggplotGrob)
+  gtl <- lapply(ggplots, ggplot2::ggplotGrob)
   #return(gtl)
   bind2 <- function (x, y) 
   {
@@ -128,10 +132,10 @@ rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = 
     x$layout <- rbind(x$layout, y$layout)
     x$heights <- insert.unit(x$heights, y$heights)
     x$rownames <- c(x$rownames, y$rownames)
-    x$widths <- unit.pmax(x$widths, y$widths)
+    x$widths <- grid::unit.pmax(x$widths, y$widths)
     x$grobs <- append(x$grobs, y$grobs)
     x
   }
   
-  arrangeGrob(Reduce(bind2, gtl), ncol=1)
+  gridExtra::arrangeGrob(Reduce(bind2, gtl), ncol=1)
 }

@@ -1,4 +1,7 @@
-#'
+#' A function to extract the legend from a ggplot object
+#' 
+#' This function pulls out the legend as a grob object from a ggplot object. This lets you
+#' play around with a plots layout by using the arrangeGrob function.
 #'
 #' @title Extract legend from ggplot geom object
 #' @description Lets you extract a ggplot legend to be used elsewhere. 
@@ -8,6 +11,7 @@
 #' @export
 #' @examples
 #' ## Create a plot with a legend
+#' library(ggplot2)
 #' plt1 <- ggplot() + geom_boxplot(aes(factor(gear), mpg, fill=factor(gear)), mtcars)
 #' ## Extract the legend from the plot.
 #' plt_legend <- g_legend(plt1)
@@ -16,6 +20,7 @@
 #' ## Suppress the legends from both plots
 #' plt1 <- plt1 +  theme(legend.position="none")
 #' plt2 <- plt2 +  theme(legend.position="none")
+#' library(gridExtra)
 #' combined_plot <- arrangeGrob(plt1, plt2, plt_legend, ncol=3)
 #' combined_plot
 #' ## Or a slightly nicer example
@@ -30,7 +35,7 @@ g_legend<-function(gg.plot){
     stop("Does your plot have a legend in it?")
   }
   
-  tmp <- ggplot_gtable(ggplot_build(gg.plot))
+  tmp <- ggplot2::ggplot_gtable(ggplot_build(gg.plot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
   legend <- tmp$grobs[[leg]]
   return(legend)
