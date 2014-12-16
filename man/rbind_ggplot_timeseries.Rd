@@ -37,13 +37,13 @@ to work with time series plots and allow for the combination of multiple plots.
  library(dplyr)
  library(reshape2)
  library(ggthemes)
- data(breamardata)
- breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
+ data(breamar)
+ breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
 
  # Create three plots without subsetting the data.
- rain_plot <- ggplot() + geom_line(aes(date, rain_mm), breamardata) + theme_few(20)
- min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_few(20)
- max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_few(20)
+ rain_plot <- ggplot() + geom_line(aes(date, rain_mm), breamar) + theme_few(20)
+ min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_few(20)
+ max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_few(20)
 
  # Plot all three together
  combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
@@ -63,17 +63,17 @@ combined_plot
  combined_plot
  # An example with data from different time frames
  # Plot monthly rain from 1960 - 1980
- rain_plot <- breamardata \%>\%
+ rain_plot <- breamar \%>\%
      filter(date<=dmy("01011980")) \%>\%
      ggplot() + geom_line(aes(date, rain_mm)) + theme_few(20)
  rain_plot
  # Plot monthly minimum temp from 1980 - 2000
- min_temp_plot <- breamardata \%>\%
+ min_temp_plot <- breamar \%>\%
    filter(date>=dmy("01011980")&date<=dmy("01012000")) \%>\%
    ggplot() + geom_line(aes(date, min_temp)) + theme_few(20)
  min_temp_plot
  # Plot  monthly maximum temp from 2000 onwards
- max_temp_plot <- breamardata \%>\%
+ max_temp_plot <- breamar \%>\%
    filter(date>=dmy("01012000")) \%>\%
    ggplot() + geom_line(aes(date, max_temp)) + theme_few(20)
  max_temp_plot
@@ -88,9 +88,9 @@ combined_plot
 
 # An example with a legend
 # Create three plots without subsetting the data.
-rain_plot <- ggplot() + geom_line(aes(date, rain_mm), breamardata) + theme_few(20)
+rain_plot <- ggplot() + geom_line(aes(date, rain_mm), breamar) + theme_few(20)
 # Create a plot with groups and a legend.
-temp_data <- melt(breamardata[, c("date", "min_temp", "max_temp")],
+temp_data <- melt(breamar[, c("date", "min_temp", "max_temp")],
                   id.var = "date"
                   )
 temp_plot <- ggplot() + geom_line(aes(date, value, colour=variable), temp_data) +
