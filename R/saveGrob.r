@@ -68,7 +68,7 @@ grobsave <- function(filename = default_name(plot), plot = NULL,
     grDevices::tiff(..., width=width, height=height, res = dpi, units = "in")
   
   default_name <- function(plot) {
-    paste(ggplot2::digest.ggplot(plot), ".pdf", sep="")
+    paste(digest.ggplot(plot), ".pdf", sep="")
   }
   
   default_device <- function(filename) {

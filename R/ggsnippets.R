@@ -2,5 +2,6 @@
 #'
 #' @name ggsnippets
 #' @docType package
-#' @import grid
+#' @import grid ggplot2 gridExtra digest
+
 NULL

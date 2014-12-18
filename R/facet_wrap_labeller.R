@@ -30,6 +30,8 @@
 #'                                    expression(frac(c,2)),
 #'                                     "d",
 #'                                      expression(infinity)))
+#'  
+#'                                      
 
  
 facet_wrap_labeller <- function(gg.plot,labels=NULL) {

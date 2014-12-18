@@ -84,29 +84,29 @@ shrink_space <- function(ggplot_list, shrink_factor){
 
 
 # 
-# bolus <- function(x) UseMethod("bolus")
-# bolus.proto <- function(x) x$bolus()
-# 
-# bolus.ggplot <- function(x, ...) {
-#   sort.by.name <- function(x) {
-#     if (is.null(names(x))) return(x)
-#     x[order(names(x))]
-#   }
-#   
-#   with(x, list(
-#     data = digest::digest(data),
-#     mapping = sort.by.name(mapping),
-#     layers = sapply(layers, function(x) x$hash()),
-#     scales = digest::digest(scales),
-#     facet = facet$hash(),
-#     coord = coordinates$hash(),
-#     theme = digest::digest(defaults(x$theme, theme_get()))
-#   ))
-# }
-# 
-# digest.proto <- function(x, ...) x$hash(, ...)
-# digest.ggplot <- function(x, ...) {
-#   if (is.null(x)) return()
-#   digest::digest(bolus(x), ...)
-# }
+bolus <- function(x) UseMethod("bolus")
+bolus.proto <- function(x) x$bolus()
+
+bolus.ggplot <- function(x, ...) {
+  sort.by.name <- function(x) {
+    if (is.null(names(x))) return(x)
+    x[order(names(x))]
+  }
+  
+  with(x, list(
+    data = digest::digest(data),
+    mapping = sort.by.name(mapping),
+    layers = sapply(layers, function(x) x$hash()),
+    scales = digest::digest(scales),
+    facet = facet$hash(),
+    coord = coordinates$hash(),
+    theme = digest::digest(defaults(x$theme, theme_get()))
+  ))
+}
+
+digest.proto <- function(x, ...) x$hash(, ...)
+digest.ggplot <- function(x, ...) {
+  if (is.null(x)) return()
+  digest(bolus(x), ...)
+}
 

@@ -4,4 +4,4 @@ library(ggplot2)
 library(gridExtra)
 
 
-test_check("ggsnippets")
+#test_check("ggsnippets")

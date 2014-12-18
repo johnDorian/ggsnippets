@@ -1,9 +1,11 @@
 Package: ggsnippets
-Depends:
+Imports:
     ggplot2,
+    grid,
     gridExtra,
-    gtable,
     digest
+Depends: 
+    gtable
 Title: A few addons for the ggplot2 package
 Version: 1.0
 Date: 2014-11-05

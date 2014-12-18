@@ -16,6 +16,7 @@
 #'  and combines them in one column and returns a \code{grob} object. 
 #' @export
 #'  @examples
+#'  \dontrun{
 #'  # Load some example time series data
 #'  library(lubridate)
 #'  library(dplyr)
@@ -85,6 +86,7 @@
 #'                                                             ),
 #'                                          limits = c(dmy("01011990", "31122000"))
 #' )
+#' }
 rbind_ggplot_timeseries <- function(ggplot_list=list(), limits, hide_x_labels = TRUE, 
                                     shrink_space = TRUE, shrink_factor = 0.2){
   ## Taken and modified from http://stackoverflow.com/questions/13294952/

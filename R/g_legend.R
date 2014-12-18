@@ -35,7 +35,7 @@ g_legend<-function(gg.plot){
     stop("Does your plot have a legend in it?")
   }
   
-  tmp <- ggplot2::ggplot_gtable(ggplot_build(gg.plot))
+  tmp <- ggplot2::ggplot_gtable(ggplot2::ggplot_build(gg.plot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
   legend <- tmp$grobs[[leg]]
   return(legend)
