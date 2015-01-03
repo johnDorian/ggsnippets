@@ -3,5 +3,5 @@ library(ggsnippets)
 library(ggplot2)
 library(gridExtra)
 
-
-#test_check("ggsnippets")
+# tests are currently turned off while the braemer data is broken. 
+test_check("ggsnippets")
