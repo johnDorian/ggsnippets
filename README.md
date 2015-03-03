@@ -2,8 +2,12 @@
 title: "README"
 output: html_document
 ---
+
+# ggsnippets 
+
 [![Build Status](https://travis-ci.org/johnDorian/ggsnippets.png?branch=master)](https://travis-ci.org/johnDorian/ggsnippets)
 
-This package is a small package which loads all things hadley like.
+This package includes useful functions to be used with ggplot2.
 
-I have also added a couple of useful functions for the `ggplot2` package. 
+Stay tuned for more...
+
