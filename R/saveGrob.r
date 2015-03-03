@@ -35,6 +35,7 @@
 #' # make twice as big as on screen
 #' ggsave("ratings.pdf", ratings, scale=2)
 #' }
+#' 
 grobsave <- function(filename = default_name(plot), plot = NULL,
                    device = default_device(filename), path = NULL, scale = 1,
                    width = par("din")[1], height = par("din")[2], units = c("in", "cm", "mm"),
@@ -42,7 +43,7 @@ grobsave <- function(filename = default_name(plot), plot = NULL,
   
   # This is the orginal line that is in ggsave - but removed for this function. 
   #if (!inherits(plot, "ggplot")) stop("plot should be a ggplot2 plot")
-  if(is.null(plot)) stop("plot needs to be provided. plot = last_plot() will not work here.")
+  if(is.null(plot)) stop("plot needs to be provided. plot = last_plot() will not work here as only\n the last grob will be saved.")
   if(!inherits(plot, c("grob", "ggplot"))) stop("plot should be a ggplot2 plot or a grob object")
   eps <- ps <- function(..., width, height)
     grDevices::postscript(..., width=width, height=height, onefile=FALSE,
