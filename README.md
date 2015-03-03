@@ -10,7 +10,7 @@ output:
 
 # ggsnippets 
 
-[![Build Status](https://travis-ci.org/johnDorian/ggsnippets.png?branch=master)](https://travis-ci.org/johnDorian/ggsnippets)
+[![Build Status](https://travis-ci.org/johnDorian/ggsnippets.svg?branch=master)](https://travis-ci.org/johnDorian/ggsnippets)
 
 This package includes useful functions to be used with ggplot2.
 
