@@ -2,10 +2,10 @@ context("Testing the rbind_ggplot_timeseries function")
 library(lubridate)
 
 test_that("A simple working example", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                               max_temp_plot
   ),
@@ -16,10 +16,10 @@ test_that("A simple working example", {
 )
 
 test_that("Only one limit - should throw an error", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -29,10 +29,10 @@ test_that("Only one limit - should throw an error", {
 )
 
 test_that("Non datetime limit - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -42,10 +42,10 @@ test_that("Non datetime limit - should throw an error ", {
 )
 
 test_that("Non logical hide_x_labels - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -56,10 +56,10 @@ test_that("Non logical hide_x_labels - should throw an error ", {
 )
 
 test_that("Non n=1 hide_x_labels - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -70,10 +70,10 @@ test_that("Non n=1 hide_x_labels - should throw an error ", {
 )
 
 test_that("Non logical shrink_space - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -84,10 +84,10 @@ test_that("Non logical shrink_space - should throw an error ", {
 )
 
 test_that("Non n=1 shrink_space - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -98,10 +98,10 @@ test_that("Non n=1 shrink_space - should throw an error ", {
 )
 
 test_that("Non numeric shrink_factor - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),
@@ -112,10 +112,10 @@ test_that("Non numeric shrink_factor - should throw an error ", {
 )
 
 test_that("Non n=1 shrink_factor - should throw an error ", {
-  data(breamardata)
-  breamardata$date <- ymd(paste(breamardata$year, breamardata$month, "1"))
-  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamardata) + theme_bw(20)
-  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamardata) + theme_bw(20)
+  data(breamar)
+  breamar$date <- ymd(paste(breamar$year, breamar$month, "1"))
+  min_temp_plot <- ggplot() + geom_line(aes(date, min_temp), breamar) + theme_bw(20)
+  max_temp_plot <- ggplot() + geom_line(aes(date, max_temp), breamar) + theme_bw(20)
   expect_error(rbind_ggplot_timeseries(ggplot_list = list(min_temp_plot,
                                                           max_temp_plot
   ),

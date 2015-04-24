@@ -32,8 +32,7 @@ This function is based on the rbind function in the gtable package. The function
 to work with time series plots and allow for the combination of multiple plots.
 }
 \examples{
-\dontrun{
- # Load some example time series data
+# Load some example time series data
  library(lubridate)
  library(dplyr)
  library(reshape2)
@@ -102,6 +101,5 @@ combined_plot <- rbind_ggplot_timeseries(ggplot_list = list(rain_plot,
                                                             ),
                                          limits = c(dmy("01011990", "31122000"))
 )
-}
 }
 

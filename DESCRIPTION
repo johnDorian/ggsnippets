@@ -14,7 +14,6 @@ Author: Jason Lessels
 Maintainer: Jason Lessels <jlessels@gmail.com>
 Description: A package to store some useful ggplot functions.
 LazyLoad: yes
-LazyData: yes
 License: GPL
 Suggests:
     testthat,

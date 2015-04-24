@@ -20,7 +20,9 @@ NULL
 #'  \item sun_hours. The amount of sunlight hours for the month.
 #'  }
 #'  
+#'  @docType data
+#'  @keywords datasets
+#'  @name breamar
+#'  @usage data(breamar)
 #'  @format A data frame with 669 rows and 6 variables
-#'  @name breamardata
-
 NULL
