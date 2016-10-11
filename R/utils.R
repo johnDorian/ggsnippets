@@ -30,10 +30,10 @@ ggplot_x_date_scale <- function(x){
   # Build the plot
   build <- ggplot2::ggplot_build(x)
   # Check to see if the y axis is a datetime or date scale on the x axis  
-  if(inherits(build$panel$x_scales[[1]], "datetime")){
+  if(inherits(build$panel$x_scales[[1]], "ScaleContinuousDatetime")){
     return("datetime")
   }
-  if(inherits(build$panel$x_scales[[1]], "date")){
+  if(inherits(build$panel$x_scales[[1]], "ScaleContinuousDate")){
     return("date")
   }
   stop("X axis scale must be either date or datetime")
